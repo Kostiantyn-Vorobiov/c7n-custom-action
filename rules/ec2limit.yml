@@ -1,0 +1,29 @@
+policies:
+  - name: ec2limit
+    mode:
+      type: ec2-instance-state
+      events:
+        - running
+      role: arn:aws:iam::700154504226:role/c7n-test-role
+    resource: aws.ec2
+    description: |
+      Notify, stop or terminate on any ec2 instances that exceed
+      the limit of running instances of this type
+    comments: |
+      Vars section is passing to the custom lambda
+    filters:
+      - type: value
+        key: InstanceType
+        value:
+           - m1.medium
+        op: in
+      - "State.Name": running
+    actions:
+    - type: invoke-lambda
+      function: cc-limit-ec2
+      vars: 
+        {
+          "limit":"1",       # int
+          "action":"terminate"   # notify | stop | terminate
+        }
+      

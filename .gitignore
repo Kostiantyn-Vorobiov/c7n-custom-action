@@ -1,2 +1,6 @@
 custodian/*
-.terraform/*
+**/.terraform/*
+**/terraform.tfstate*
+**/**.zip
+terraform/builds/**
+**/out/*

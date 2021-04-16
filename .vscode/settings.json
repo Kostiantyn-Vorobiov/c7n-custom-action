@@ -1,0 +1,6 @@
+{
+    "python.pythonPath": "custodian/bin/python",
+    "yaml.schemas": {
+        "./schema.json": "*yml"
+    },
+}
